@@ -1,3 +1,4 @@
+import uuid
 import datetime
 import os
 
@@ -27,7 +28,7 @@ class Record(Base):
     __tablename__ = "records"
 
     id = sqlalchemy.Column(
-        sqlalchemy.Integer, primary_key=True, index=True, autoincrement=True
+        sqlalchemy.UUID, primary_key=True, index=True, default=uuid.uuid4
     )
     text = sqlalchemy.Column(sqlalchemy.String)
-    created_at = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now())
+    created_at = sqlalchemy.Column(sqlalchemy.DateTime, default=datetime.datetime.now)

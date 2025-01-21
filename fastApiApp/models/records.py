@@ -1,4 +1,5 @@
 import datetime
+import uuid
 from typing import List
 
 from pydantic import BaseModel
@@ -9,7 +10,7 @@ class RecordRequest(BaseModel):
 
 
 class RecordResponse(BaseModel):
-    id: int
+    id: uuid.UUID
     text: str
     created_at: datetime.datetime
 
