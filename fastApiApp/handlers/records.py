@@ -20,6 +20,7 @@ async def create_record_pg(
     db.refresh(record)
     return RecordResponse(id=record.id, text=record.text, created_at=record.created_at)
 
+
 @router.post("/post_ch")
 async def create_record_ch(
     record: RecordRequest, db: Session = Depends(get_ch)

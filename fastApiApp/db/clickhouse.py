@@ -27,13 +27,11 @@ Base = sqlalchemy.orm.declarative_base()
 class Record(Base):
     __tablename__ = "records"
 
-    id = sqlalchemy.Column(
-        types.Int64, primary_key=True, autoincrement=True, default=1
-    )
+    id = sqlalchemy.Column(types.Int64, primary_key=True, autoincrement=True, default=1)
     text = sqlalchemy.Column(types.String)
     created_at = sqlalchemy.Column(types.DateTime64, default=datetime.datetime.now())
 
     __table_args__ = (
         engines.MergeTree(order_by=["created_at"]),
-        {'comment': 'Store records'}
+        {"comment": "Store records"},
     )
