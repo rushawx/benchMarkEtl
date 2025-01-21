@@ -64,7 +64,9 @@ async def get_records_ch(db: Session = Depends(get_ch)) -> AllRecordsResponse:
 
 
 @router.post("/replicate_pg_to_ch")
-async def replicate_pg_to_ch(db_pg: Session = Depends(get_pg), db_ch: Session = Depends(get_ch)):
+async def replicate_pg_to_ch(
+    db_pg: Session = Depends(get_pg), db_ch: Session = Depends(get_ch)
+):
     records = db_pg.query(PgRecord).all()
     for record in records:
         db_ch.add(ChRecord(text=record.text))
@@ -73,7 +75,9 @@ async def replicate_pg_to_ch(db_pg: Session = Depends(get_pg), db_ch: Session = 
 
 
 @router.post("/replicate_ch_to_pg")
-async def replicate_ch_to_pg(db_ch: Session = Depends(get_ch), db_pg: Session = Depends(get_pg)):
+async def replicate_ch_to_pg(
+    db_ch: Session = Depends(get_ch), db_pg: Session = Depends(get_pg)
+):
     records = db_ch.query(ChRecord).all()
     for record in records:
         db_pg.add(PgRecord(text=record.text))
@@ -83,13 +87,13 @@ async def replicate_ch_to_pg(db_ch: Session = Depends(get_ch), db_pg: Session = 
 
 @router.delete("/delete_pg")
 async def delete_records_pg(db: Session = Depends(get_pg)):
-    db.query(text('TRUNCATE TABLE records'))
+    db.query(text("TRUNCATE TABLE records"))
     db.commit()
     return {"message": "All records deleted successfully!"}
 
 
 @router.delete("/delete_ch")
 async def delete_records_ch(db: Session = Depends(get_ch)):
-    db.query(text('TRUNCATE TABLE records'))
+    db.query(text("TRUNCATE TABLE records"))
     db.commit()
     return {"message": "All records deleted successfully!"}

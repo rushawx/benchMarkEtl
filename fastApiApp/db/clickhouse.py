@@ -28,7 +28,9 @@ Base = sqlalchemy.orm.declarative_base()
 class Record(Base):
     __tablename__ = "records"
 
-    id = sqlalchemy.Column(types.String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = sqlalchemy.Column(
+        types.String, primary_key=True, default=lambda: str(uuid.uuid4())
+    )
     text = sqlalchemy.Column(types.String)
     created_at = sqlalchemy.Column(types.DateTime64, default=datetime.datetime.now)
 
