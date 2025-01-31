@@ -63,3 +63,13 @@ services:
         condition: service_healthy
       ch:
         condition: service_healthy
+
+  netapp:
+    build: netApp
+    ports:
+      - "8080:8080"
+    depends_on:
+      pg:
+        condition: service_healthy
+      ch:
+        condition: service_healthy
